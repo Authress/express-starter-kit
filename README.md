@@ -1,4 +1,4 @@
-# Authress Express Starter Kit
+# Authress Starter Kit for Express + Typscript
 The Express Starter Kit for Authress includes Authentication, Authorization, user identity and role management
 
 This is an example built specifically for using Authress with Typescript & Express.
