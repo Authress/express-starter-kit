@@ -8,11 +8,17 @@ This is an example built specifically for using Authress with Typescript & Expre
 To test and run the example:
 * `npm install` or `yarn`
 * `npm start` or `yarn start`
+* And then use `curl` or `postman` to hit any of the endpoints.
 
 ## See the code
 If you just want to see the code, it's available right here. Most of it is boilerplate to run the example the interesting part starts a bit lower down.
 
-* [Microservice.js](./src/index.ts#L43)
+* [index.ts](./src/index.ts#L43)
+
+There are three controllers, they all use Authress in some way to authorize the request and check the users permissions:
+* [Accounts](./src/accounts/accountController.ts) - General creating an account and setting up SSO
+* [ExampleResource](./src/resourceManagement/exampleResourceController.ts) - How to secure a reason creating access and updating it
+* [Users](./src/users/usersController.ts) - Managing users for the whole account.
 
 ## Details
 

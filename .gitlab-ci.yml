@@ -1,0 +1,18 @@
+image: node:lts
+stages:
+- build
+- test
+
+merge_request:
+  stage: build
+  coverage: "/All files[^|]*\\|[^|]*\\s+([\\d\\.]+)/"
+  except:
+  - main
+  - schedules
+  script:
+  - yarn install --frozen-lockfile
+
+sast:
+  stage: test
+include:
+- template: Security/SAST.gitlab-ci.yml
