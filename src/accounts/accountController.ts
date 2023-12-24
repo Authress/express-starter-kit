@@ -17,7 +17,7 @@ function formatAccount(account: { accountId: string }) {
   return {
     accountId: account.accountId,
     links: {
-      self: { href: `https://RESPONSE_HOST_REWRITE/api/accounts/${account.accountId}` }
+      self: { href: `http://localhost:8080/accounts/${account.accountId}` }
     }
   };
 }

@@ -8,6 +8,29 @@ const exampleResourceController = express.Router();
 export default exampleResourceController;
 
 /** Routes */
+// Get all resources
+exampleResourceController.get('/', async (request: Request, response: Response, next: NextFunction) => {
+  const userId = response.locals.userId;
+  const accountId = request.params.accountId;
+
+  // Ensure user has permissions to read the resource resources (userId, resourceUri, permission)
+  const userHasPermissionToResource = await authressPermissionsWrapper.hasAccessToResource(userId, `/accounts/${accountId}/resources`, 'READ');
+  if (!userHasPermissionToResource) {
+    response.status(403).json({ title: 'User does not have access to read resources' });
+    return;
+  }
+
+  try {
+    const resources = await resourceRepository.getAllThings();
+
+    response.status(200).json({
+      resources
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Get a resource
 exampleResourceController.get('/:id', async (request: Request, response: Response, next: NextFunction) => {
   const userId = response.locals.userId;
@@ -17,7 +40,7 @@ exampleResourceController.get('/:id', async (request: Request, response: Respons
   // Ensure user has permissions to read the resource resources (userId, resourceUri, permission)
   const userHasPermissionToResource = await authressPermissionsWrapper.hasAccessToResource(userId, `/accounts/${accountId}/resources/${resourceId}`, 'READ');
   if (!userHasPermissionToResource) {
-    response.status(403).json({ title: 'User does not have access to read this resources' });
+    response.status(403).json({ title: 'User does not have access to read this resource.' });
     return;
   }
 
@@ -51,7 +74,7 @@ exampleResourceController.post('/', async (request: Request, response: Response,
 
     // Grant the user access own the resource
     // Owner by default gives full control over this new resource, including the ability to grant others access as well.
-    await authressPermissionsWrapper.setRoleForUser(accountId, userId, globalIdentifierForResourceId, 'Authress:Owner')
+    await authressPermissionsWrapper.setRoleFrorUser(accountId, userId, globalIdentifierForResourceId, 'Authress:Owner')
 
     // Return the new resource
     response.status(200).json({ resourceId: newResourceId });

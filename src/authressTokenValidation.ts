@@ -42,8 +42,14 @@ export default async function authressTokenValidation (
     }
     if (error.code === 'Unauthorized' || error.code === 'TokenVerificationError') {
       response.status(401).json({
-        title: 'The response is a 401 to your request to this starter-kit. Your request failed the Authress Token Validator check in the src/authressTokenValidation.ts file',
-        error
+        title: 'The response is a 401 to your request to this starter-kit. Your request failed the Authress Token Validator because the Authorization header token provided in the request is invalid. Verify that the auth token you are using in the request is valid',
+        token,
+        error: {
+          code: error.code,
+          name: error.name,
+          reason: error.reason,
+          message: error.message
+        }
       });
       return;
     }

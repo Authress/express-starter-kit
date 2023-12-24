@@ -184,7 +184,7 @@ array-flatten@1.1.1:
   resolved "https://registry.npmjs.org/array-flatten/-/array-flatten-1.1.1.tgz"
   integrity sha512-PCVAQswWemu6UdxsDFFX/+gVeYqKAod3D3UVm91jHwynguOwAvYPhx8nNlM++NqRcK6CxxpUafjmhIdKiHibqg==
 
-authress-sdk@^2.1.99:
+authress-sdk@^2:
   version "2.1.99"
   resolved "https://registry.yarnpkg.com/authress-sdk/-/authress-sdk-2.1.99.tgz#08b9b2b312ed71c4a3da2345e9cc189fc0e8e36c"
   integrity sha512-/RaBtQdtosmFlUPPBXhZgnYkAmQRQvDUVJ78ETNoGTCVsCzfHNQKiap3q7BfQPsKIO4De9UvW18lle5BPXFVpA==
