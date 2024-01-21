@@ -6,14 +6,14 @@ import { AssignedUserRoles, SsoConnection, SsoConfiguration} from './dtos';
 // Generate the service client access key at https://authress.io/app/#/settings?focus=clients
 const serviceClientAccessKey = 'sc_001.access_key';
 // // Generate the authress domain at https://authress.io/app/#/settings?focus=domain
-const authressDomain = 'https://authress.company.com';
-const authressClient = new AuthressClient({ authressApiUrl: authressDomain }, serviceClientAccessKey);
+const authressApiUrl = 'https://authress.company.com';
+const authressClient = new AuthressClient({ authressApiUrl }, serviceClientAccessKey);
 
 class AuthressPermissionsWrapper {
   async getAuthressProperties() {
     await new ServiceClientTokenProvider(serviceClientAccessKey).getToken();
     return {
-      authressDomain
+      authressApiUrl
     };
   }
 

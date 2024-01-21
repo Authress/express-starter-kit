@@ -34,9 +34,9 @@ export default async function authressTokenValidation (
     response.locals.userId = userIdentity.sub;
   } catch (error: any) {
     const authressProperties = await authressPermissionsWrapper.getAuthressProperties();
-    if (authressProperties.authressDomain === 'https://authress.company.com') {
+    if (authressProperties.authressApiUrl === 'https://authress.company.com') {
       response.status(401).json({
-        title: 'Your Authress custom domain is not set. Go to the src/authressPermissionsWrapper.ts and set the authressDomain at the top of the file. This should match your Authress Custom domain.',
+        title: 'Your Authress custom domain is not set. Go to the src/authressPermissionsWrapper.ts and set the authressApiUrl at the top of the file. This should match your Authress Custom domain.',
         error
       });
     }
