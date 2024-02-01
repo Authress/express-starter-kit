@@ -1,4 +1,4 @@
-import authress, { AuthressClient, ServiceClientTokenProvider, UserResources, UserIdentity, Connection, Tenant, UnauthorizedError, ApiError } from 'authress-sdk';
+import authress, { AuthressClient, ServiceClientTokenProvider, UserResources, UserIdentity, Connection, Tenant, UnauthorizedError, ApiError } from '@authress/sdk';
 const { ConnectionData } = authress;
 import { AssignedUserRoles, SsoConnection, SsoConfiguration} from './dtos';
 

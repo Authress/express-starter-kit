@@ -11,7 +11,7 @@ import helmet from "helmet";
 import http from 'http';
 import stringify from 'json-stringify-safe';
 import bodyParser from 'body-parser';
-import { UnauthorizedError } from "authress-sdk";
+import { UnauthorizedError } from "@authress/sdk";
 
 class BoilerPlate {
   setup(app: Express) {
