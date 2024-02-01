@@ -1,4 +1,4 @@
-import { AuthressClient } from 'authress-sdk';
+import { AuthressClient } from '@authress/sdk';
 import express, { NextFunction, Request, Response } from 'express';
 
 import resourceRepository from './exampleDataRepository';

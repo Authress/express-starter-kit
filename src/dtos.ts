@@ -1,4 +1,4 @@
-import { Connection } from 'authress-sdk';
+import { Connection } from '@authress/sdk';
 
 export interface AssignedUserRoles {
   userId: string;
