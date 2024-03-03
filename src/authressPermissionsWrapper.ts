@@ -80,7 +80,7 @@ class AuthressPermissionsWrapper {
 
   async removeUserFromAccount(accountId: string, userId: string): Promise<void> {
     // See {@link setRoleForUser} for where this value comes from
-    const recordId = `A:${accountId}:U:${userId}`;
+    const recordId = `rec_A:${accountId}:U:${userId}`;
 
     try {
       await authressClient.accessRecords.deleteRecord(recordId);
@@ -96,7 +96,7 @@ class AuthressPermissionsWrapper {
   async setRoleForUser(accountId: string, userId: string, rawResourceUris: string | string[], newRoles: string | string[]): Promise<void> {
     // We are creating an access record to dedicated to this user to define their permissions
     // * In this case we decided that `A` the account and `U` the userId would make up the user's record For different accounts the user will have separate records. Although this doesn't have to be the case, it makes it much easier to delete the access record later.
-    const recordId = `A:${accountId}:U:${userId}`;
+    const recordId = `rec_A:${accountId}:U:${userId}`;
     const resourceUris: string[] = Array.isArray(rawResourceUris) ? rawResourceUris : [rawResourceUris];
 
 
@@ -116,7 +116,7 @@ class AuthressPermissionsWrapper {
 
       return;
     } catch (error) {
-      if (error instanceof ApiError && error.status === 404) {
+      if (error.status !== 404) {
         throw error;
       }
 
@@ -137,7 +137,7 @@ class AuthressPermissionsWrapper {
   }
 
   async getSsoConfiguration(accountId: string): Promise<SsoConfiguration | null> {
-    const connectionId = `sso-${accountId}`;
+    const connectionId = `con_sso-${accountId}`;
 
     try {
       const connectionResponse = await authressClient.connections.getConnection(connectionId);
@@ -180,7 +180,7 @@ class AuthressPermissionsWrapper {
         supportedContentType: ConnectionData.SupportedContentTypeEnum.XWwwFormUrlencoded
       },
     }
-    const connectionId = `sso-${accountId}`;
+    const connectionId = `con_sso-${accountId}`;
     await authressClient.connections.updateConnection(connectionId, connectionConfiguration);
 
     const tenant: Tenant = {
@@ -203,7 +203,7 @@ class AuthressPermissionsWrapper {
 
   async deleteSsoConfiguration(accountId: string): Promise<void> {
     try {
-      const connectionId = `sso-${accountId}`;
+      const connectionId = `con_sso-${accountId}`;
       await authressClient.connections.deleteConnection(connectionId);
     } catch (error) {
       if (error instanceof ApiError && error.status === 404) {
